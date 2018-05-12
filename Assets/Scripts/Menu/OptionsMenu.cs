@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -37,10 +39,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        if (audioMixer != null)
-        {
-            audioMixer.SetFloat("Volume", volume);
-        }
+        audioMixer.SetFloat("Volume", volume);
     }
 
     public void SetQuality(int qualityIndex)

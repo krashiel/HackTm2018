@@ -1,23 +1,17 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionsMenu;
-    public GameObject loadingUI;
-    public GameObject gameUI;
 
     public static MenuManager Instance;
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.Log("warning more than one menu manager instances found");
-            return;
-        }
         Instance = this;
-        SetMainMenu(true);
     }
 
     public void SetMainMenu(bool status)
@@ -25,41 +19,10 @@ public class MenuManager : MonoBehaviour
         if (status)
         {
             StopTime();
-            SetOptionsMenu(false);
-            SetLoadingUI(false);
-            SetGameUI(false);
+            if (optionsMenu.activeSelf)
+                SetOptionsMenu(false);
         }
         mainMenu.SetActive(status);
-    }
-
-    public void SetOptionsMenu(bool status)
-    {
-        if (status)
-        {
-            SetMainMenu(false);
-        }
-        optionsMenu.SetActive(status);
-    }
-
-    public void SetLoadingUI(bool status)
-    {
-        if (status)
-        {
-            SetMainMenu(false);
-            SetOptionsMenu(false);
-        }
-        loadingUI.SetActive(status);
-    }
-
-    public void SetGameUI(bool status)
-    {
-        if (status)
-        {
-            SetMainMenu(false);
-            SetOptionsMenu(false);
-            SetLoadingUI(false);
-        }
-        gameUI.SetActive(status);
     }
 
     public void UnpauseGame()
@@ -79,12 +42,13 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void Update()
+    public void SetOptionsMenu(bool status)
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (status)
         {
-            SetMainMenu(true);
+            SetMainMenu(false);
         }
+        optionsMenu.SetActive(status);
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadGameScene()
     {
-        StartCoroutine(LoadLevelAsync(1));
+        StartCoroutine(LoadLevelAsync());
     }
 
     public void QuitGame()
@@ -36,17 +37,17 @@ public class MainMenu : MonoBehaviour
         IsGamePaused = true;
     }
 
-    //this is not used but it may be...
     private void LoadGame()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelScene"));
     }
 
-    IEnumerator LoadLevelAsync(int sceneIndex)
+    IEnumerator LoadLevelAsync()
     {
-        //LoadingScreen.SetActive(true);
-        MenuManager.Instance.SetGameUI(true);
+        MenuManager.Instance.SetMainMenu(false);
+        Time.timeScale = 1;
         yield return null;
+        //LoadingScreen.SetActive(true);
         //var scene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
 
         //this.gameObject.SetActive(false);

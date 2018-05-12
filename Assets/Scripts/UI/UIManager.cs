@@ -56,11 +56,11 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             SetPlayerInventoryActive(!playerInventoryObject.activeSelf);
         }
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             SetCraftingMenuActive(!craftingMenuObject.activeSelf);
         }
