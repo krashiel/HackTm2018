@@ -473,8 +473,8 @@ GameObject:
   - component: {fileID: 95608477812735460}
   - component: {fileID: 54215388135471432}
   - component: {fileID: 136460812625631820}
-  - component: {fileID: 114126513409385764}
   - component: {fileID: 195958365064347154}
+  - component: {fileID: 114845240697762320}
   m_Layer: 0
   m_Name: Troll_cannibal
   m_TagString: Untagged
@@ -1790,7 +1790,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114126513409385764
+--- !u!114 &114845240697762320
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1798,10 +1798,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1596672879822900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea167a877ca4c27438c5786746cc373a, type: 3}
+  m_Script: {fileID: 11500000, guid: 31c93b7c3c774ec478b54f3f75d414d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 3
+  lookRadius: 4
 --- !u!136 &136460812625631820
 CapsuleCollider:
   m_ObjectHideFlags: 1

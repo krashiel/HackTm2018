@@ -15,6 +15,7 @@ public class character_movement : MonoBehaviour
     Animator _animator;
     Animator _treeAnimator;
     Rigidbody _rigidbody;
+    public Transform currentGround;
 
     bool actionBool;
     bool lookAtBool;
@@ -23,7 +24,7 @@ public class character_movement : MonoBehaviour
     bool lumberingBool = false;
     bool shouldRotate;
 
-    NavMeshAgent controller;
+    public NavMeshAgent controller;
     float verticalVelocity;
     float gravity = 7.0f;
     float speed = 2.0f;
@@ -45,16 +46,37 @@ public class character_movement : MonoBehaviour
 
     void Start()
     {
-       // Instantiate(inventoryPrefab, inventoryPrefab.transform.position, inventoryPrefab.transform.rotation);
+        StayOnGround();
         Instantiate(cameraPrefab, cameraPrefab.transform.position, cameraPrefab.transform.rotation);
         Instantiate(PlayerManageraPrefab, PlayerManageraPrefab.transform.position, PlayerManageraPrefab.transform.rotation);
 
-        //cameraShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
         controller = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         //_choppingParticles = GameObject.FindWithTag("particleSys").GetComponent<ParticleSystem>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
+
+    public void StayOnGround()
+    {
+        RaycastHit objectHit;
+
+        Vector3 down = transform.TransformDirection(-Vector3.up);
+        Debug.DrawRay(transform.position, down * 50, Color.green);
+        if (Physics.Raycast(transform.position, down, out objectHit, 50))
+        {
+            if (objectHit.transform.tag == "ground")
+            {
+                transform.position = objectHit.point;
+                transform.rotation = Quaternion.FromToRotation(transform.up, objectHit.normal) * transform.rotation;
+                currentGround = objectHit.transform;
+            }
+            else
+            {
+                Destroy(transform.gameObject);
+            }
+        }
+
     }
     void Update()
     {

@@ -44,8 +44,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator LoadLevelAsync()
     {
-        MenuManager.Instance.SetMainMenu(false);
-        Time.timeScale = 1;
+        MenuManager.Instance.SetGameUI(true);
         yield return null;
         //LoadingScreen.SetActive(true);
         //var scene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);

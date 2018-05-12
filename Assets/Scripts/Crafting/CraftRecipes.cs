@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftRecipes : MonoBehaviour {
+public class CraftRecipes : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject craftRecipesParent;
+    public List<CraftRecipe> craftingRecipes;
+
+    public void initialiseCraftRecipesView()
+    {
+        var parentRecipes = craftRecipesParent.GetComponentsInChildren<CraftRecipe>();
+        for (int i = 0; i < parentRecipes.Length; i++)
+        {
+            parentRecipes[i].checkIfEligible();
+            craftingRecipes.Add(parentRecipes[i]);
+        }
+    }
 }

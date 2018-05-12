@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class resourcesGenerator : MonoBehaviour
 {
-
+    GameObject parent;
     public List<Transform> elements;
     public float density;
     Transform ground;
 
     void Start()
     {
+        parent = new GameObject();
         ground = this.transform;
         float boundsOffset = 1;
         for (int i = 0; i < density; i++)
         {
            Transform el = Instantiate(elements[Random.Range(0, elements.Capacity)], 
                         new Vector3(Random.Range(groundBounds(ground).min.x + boundsOffset, groundBounds(ground).max.x - boundsOffset),
-                                    10,
+                                    transform.position.y + 10,
                                     Random.Range(groundBounds(ground).min.z + boundsOffset, groundBounds(ground).max.z - boundsOffset)),
                         Quaternion.Euler(0, Random.Range(0,90), 0));
             CheckForHit(el);
+            el.SetParent(parent.transform);
         }
     }
 
@@ -49,5 +51,10 @@ public class resourcesGenerator : MonoBehaviour
                 Destroy(tree.gameObject);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(parent.gameObject);
     }
 }
