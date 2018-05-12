@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class cloudsGenerator : MonoBehaviour
 {
-
+    GameObject parent;
     public List<Transform> elements;
     public float density;
     Transform ground;
 
     void Start()
     {
+        parent = new GameObject();
         ground = this.transform;
         float boundsOffset = 10;
         for (int i = 0; i < density; i++)
@@ -20,6 +21,7 @@ public class cloudsGenerator : MonoBehaviour
                                     8,
                                     Random.Range(groundBounds(ground).min.z - boundsOffset, groundBounds(ground).max.z + boundsOffset)),
                         Quaternion.Euler(0, 90, 0));
+            el.SetParent(parent.transform);
         }
     }
 
@@ -27,5 +29,10 @@ public class cloudsGenerator : MonoBehaviour
     {
         Bounds bounds = GameObject.FindWithTag("ground").GetComponent<Collider>().bounds;
         return bounds;
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(parent.gameObject);
     }
 }

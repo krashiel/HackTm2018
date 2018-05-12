@@ -34,9 +34,13 @@ public class CameraController : MonoBehaviour
         currentDistance = distance;
         desiredDistance = distance;
         correctedDistance = distance;
+    }
 
+    public void changePPD()
+    {
         PostProcessingBehaviour ppb = GetComponent<PostProcessingBehaviour>();
-        switch (GameObject.FindWithTag("ground").name)
+        string groundName = GameObject.FindWithTag("Player").GetComponent<character_movement>().currentGround ? GameObject.FindWithTag("Player").GetComponent<character_movement>().currentGround.transform.name : "naturalIsland";
+        switch (groundName)
         {
             case "naturalIsland":
                 ppb.profile = ppDatas[0];
@@ -48,12 +52,11 @@ public class CameraController : MonoBehaviour
                 ppb.profile = ppDatas[2];
                 break;
         }
-
     }
-
 
     void LateUpdate()
     {
+        changePPD();
         if (Input.GetMouseButton(1))
         {
             x += Input.GetAxis("Mouse X") * mouseXSpeed;
@@ -64,7 +67,7 @@ public class CameraController : MonoBehaviour
         {
             x += Input.GetAxis("RightJoystickAxisX") * mouseXSpeed;
             y += Input.GetAxis("RightJoystickAxisY") * mouseYSpeed;
-           // if (!character_movement.moving && !character_movement.activity) cameraTarget.transform.rotation = Quaternion.Euler(cameraTarget.transform.rotation.x, x, cameraTarget.transform.rotation.z);
+            // if (!character_movement.moving && !character_movement.activity) cameraTarget.transform.rotation = Quaternion.Euler(cameraTarget.transform.rotation.x, x, cameraTarget.transform.rotation.z);
         }
         y = ClampAngle(y, -50, 80);
 

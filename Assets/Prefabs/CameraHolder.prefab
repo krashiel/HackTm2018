@@ -153,7 +153,10 @@ MonoBehaviour:
   minViewDistance: 1
   zoomRate: 30
   cameraTargetHeight: 1
-  ppDatas: []
+  ppDatas:
+  - {fileID: 11400000, guid: 9141ceb294a93fb47a92e9a71b6223f3, type: 2}
+  - {fileID: 11400000, guid: ad6f59474746e5647af08c360044ae9d, type: 2}
+  - {fileID: 11400000, guid: 106533c13ce074f4aa244de5cc554725, type: 2}
 --- !u!114 &114361818655037914
 MonoBehaviour:
   m_ObjectHideFlags: 1
