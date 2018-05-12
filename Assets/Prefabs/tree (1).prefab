@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeHealth: 5
   isDead: 0
-  item: {fileID: 0}
+  item: {fileID: 114089255733822456, guid: 4bc7dddd3645b5143a0c1717facec061, type: 2}
   stump: {fileID: 4235529244318898, guid: 0a31c8fa335377648ab83288e67123d2, type: 2}
 --- !u!136 &136588975107744916
 CapsuleCollider:
