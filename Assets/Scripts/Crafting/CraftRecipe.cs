@@ -40,4 +40,9 @@ public class CraftRecipe : MonoBehaviour
             }
         }
     }
+
+    public void CraftItem()
+    {
+        Debug.Log("Crafting item with id {itemId}");
+    }
 }

@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             SetCraftingMenuActive(!craftingMenuObject.activeSelf);
+            craftingMenuObject.GetComponent<CraftRecipes>().initialiseCraftRecipesView();
         }
     }
 }

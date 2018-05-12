@@ -609,7 +609,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1646059223}
-        m_MethodName: changeScene
+        m_MethodName: teleport
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5752,6 +5752,34 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 551878642}
+--- !u!1 &555553190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 555553191}
+  m_Layer: 0
+  m_Name: playerSpawnPointNaturalIsland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555553191
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 555553190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.951, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658178177}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556484934
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,7 +6440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1646059223}
-        m_MethodName: changeScene
+        m_MethodName: teleport
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6732,6 +6760,7 @@ Transform:
   m_Children:
   - {fileID: 173747994}
   - {fileID: 1532117813}
+  - {fileID: 555553191}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -6847,7 +6876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672431995}
   m_Layer: 0
-  m_Name: spawnPointCharacter
+  m_Name: playerSpawnPointDesertIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7209,7 +7238,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1646059223}
         m_MethodName: teleport
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15427,7 +15456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdabbf16c7ea674c87afe8c73f19cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 672431994}
+  spawnPoint:
+  - {fileID: 555553190}
+  - {fileID: 672431994}
+  - {fileID: 1875600015}
 --- !u!1 &1647387048
 GameObject:
   m_ObjectHideFlags: 0
@@ -17130,6 +17162,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1864174370}
   m_Mesh: {fileID: 4300002, guid: 66b62323586a05541bdf731d7ce0497d, type: 3}
+--- !u!1 &1875600015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1875600016}
+  m_Layer: 0
+  m_Name: playerSpawnPointStoneIsland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875600016
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1875600015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.925, z: -4.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1981436157}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1903394166
 GameObject:
   m_ObjectHideFlags: 0
@@ -17627,6 +17687,10 @@ MonoBehaviour:
   - {fileID: 4278340919774100, guid: 93de79e715a1a184d852e7926b774b1d, type: 2}
   - {fileID: 4802625413399212, guid: 00332b44f330a8445a451c3f97b83356, type: 2}
   density: 50
+--- !u!4 &1981436157 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400004, guid: 94f0c0a9b890b294ab915bb54e3b6e03, type: 3}
+  m_PrefabInternal: {fileID: 670362458}
 --- !u!1 &1991900068
 GameObject:
   m_ObjectHideFlags: 0
