@@ -5,8 +5,6 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
-    public static UIManager Instance;
-
     public GameObject inventory;
     public GameObject playerHealthBar;
     public GameObject enemyHealthBar;
@@ -15,13 +13,6 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.Log("warning more than one ui manager instances found");
-            return;
-        }
-        Instance = this;
-
         SetPlayerInventoryActive(false);
         //SetInventoryActive(false);
         SetPlayerHealthBarActive(true);
@@ -41,6 +32,7 @@ public class UIManager : MonoBehaviour
 
     public void SetCraftingMenuActive(bool status)
     {
+        //CraftRecipes.Instance.InitialiseCraftRecipesView();
         craftingMenuObject.SetActive(status);
     }
 
@@ -63,7 +55,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             SetCraftingMenuActive(!craftingMenuObject.activeSelf);
-            craftingMenuObject.GetComponent<CraftRecipes>().initialiseCraftRecipesView();
+            craftingMenuObject.GetComponent<CraftRecipes>().InitialiseCraftRecipesView();
         }
     }
 }

@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
     public BaseItem baseItem;
     public int itemStackCount = 1;
 
-    private void Awake()
+    private void Start()
     {
         itemStackCount = 1;
     }

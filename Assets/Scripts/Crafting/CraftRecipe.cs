@@ -26,6 +26,8 @@ public class CraftRecipe : MonoBehaviour
 
         for (var i = 0; i < necessaryItems.Count; i++)
         {
+            gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.grey;
+
             var item = necessaryItems[i];
             if (inventoryItems.Contains(item))
             {
@@ -33,12 +35,10 @@ public class CraftRecipe : MonoBehaviour
                 if (invItem.ItemStackCount() >= necessaryItemsNumber[i])
                 {
                     if (shouldUpdateValues)
+                    {
                         invItem.AddStackCount(-necessaryItemsNumber[i]);
+                    }
                     isEligible = true;
-                }
-                else
-                {
-                    this.GetComponentInChildren<TextMeshProUGUI>().color = Color.grey;
                 }
             }
         }

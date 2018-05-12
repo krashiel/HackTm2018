@@ -25,13 +25,13 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public static void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
         IsGamePaused = false;
     }
 
-    public static void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0f;
         IsGamePaused = true;

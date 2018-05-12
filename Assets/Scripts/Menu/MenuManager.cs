@@ -65,7 +65,7 @@ public class MenuManager : MonoBehaviour
     public void UnpauseGame()
     {
         SetMainMenu(false);
-        SetOptionsMenu(false);
+        SetGameUI(true);
         StartTime();
     }
 
