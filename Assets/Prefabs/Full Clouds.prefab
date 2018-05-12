@@ -205,7 +205,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4557778675606568}
-  - component: {fileID: 114512995450680812}
   m_Layer: 0
   m_Name: clouds (1)
   m_TagString: Untagged
@@ -1537,24 +1536,6 @@ MonoBehaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327311568769694}
   m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c567ce2a3a8b6aa43a302bf936419e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elements:
-  - {fileID: 4106220031932770, guid: 36fba426281459d4486222b3abc64fdc, type: 2}
-  - {fileID: 4726232783203704, guid: 6e7c52bd89239ae4db53986cf8ed7a3e, type: 2}
-  - {fileID: 4633751756940154, guid: 5740ce98fcf4e1549948e4e705fbf49d, type: 2}
-  - {fileID: 4003967639956968, guid: eb6b973d641e8d942a2d6996fb2c3204, type: 2}
-  - {fileID: 4609399574773636, guid: ecd14514a35281047a5a901e9021281d, type: 2}
-  density: 20
---- !u!114 &114512995450680812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1522642551135574}
-  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c567ce2a3a8b6aa43a302bf936419e0c, type: 3}
   m_Name: 

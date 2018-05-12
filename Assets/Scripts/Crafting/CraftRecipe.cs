@@ -17,10 +17,10 @@ public class CraftRecipe : MonoBehaviour
     void Start()
     {
         inventoryItems = Inventory.instance.items;
-        this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Craft " + itemName;
+        this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Upgrade " + itemName;
     }
 
-    public void checkIfEligible()
+    public void checkIfEligible(bool shouldUpdateValues)
     {
         inventoryItems = Inventory.instance.items;
 
@@ -32,6 +32,8 @@ public class CraftRecipe : MonoBehaviour
                 var invItem = inventoryItems.FirstOrDefault(it => it.baseItem.id == item.baseItem.id);
                 if (invItem.ItemStackCount() >= necessaryItemsNumber[i])
                 {
+                    if (shouldUpdateValues)
+                        invItem.AddStackCount(-necessaryItemsNumber[i]);
                     isEligible = true;
                 }
                 else
@@ -44,11 +46,13 @@ public class CraftRecipe : MonoBehaviour
 
     public void CraftItem()
     {
-        checkIfEligible();
-        if (isEligible)
+        checkIfEligible(true);
+        if (!isEligible)
         {
-            Debug.Log("Crafting item with id {itemId}");
+            Debug.Log("Not enough materials to craft this " + itemName);
+            return;
         }
-        Debug.Log("Not enough materials to craft this item");
+        character_movement.damagePower += 1;
+        Debug.Log("Successfully upgraded weapon's power " + itemName);
     }
 }

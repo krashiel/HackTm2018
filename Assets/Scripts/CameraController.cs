@@ -56,6 +56,10 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (cameraTarget == null)
+        {
+            cameraTarget = GameObject.FindWithTag("Player").transform;
+        }
         changePPD();
         if (Input.GetMouseButton(1))
         {

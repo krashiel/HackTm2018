@@ -13,7 +13,7 @@ public class CraftRecipes : MonoBehaviour
         var parentRecipes = craftRecipesParent.GetComponentsInChildren<CraftRecipe>();
         for (int i = 0; i < parentRecipes.Length; i++)
         {
-            parentRecipes[i].checkIfEligible();
+            parentRecipes[i].checkIfEligible(false);
             craftingRecipes.Add(parentRecipes[i]);
         }
     }

@@ -14,7 +14,7 @@ public class adminScenes : MonoBehaviour
         camera_script = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
         if (player_script)
         {
-            player_script.controller.Warp(spawnPoint[index - 1].transform.position);
+            player_script.controller.Warp(spawnPoint[index].transform.position);
             player_script.StayOnGround();
             camera_script.changePPD();
         }

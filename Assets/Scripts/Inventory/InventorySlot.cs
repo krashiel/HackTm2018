@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour
         if (item != null)
         {
             UpdateItemStackText(newItem);
+            return;
         }
         item = newItem;
         icon.sprite = item.baseItem.icon;

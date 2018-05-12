@@ -3,43 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour {
-   public float lookRadius = 4;
+public class EnemyController : IController
+{
+    public float lookRadius = 5;
+
     Transform target;
     NavMeshAgent agent;
     Animator _animator;
 
+    bool followEnemy = false;
 
-    void Start () {
-        target = PlayerManager.instance.player.transform;
+    void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-
     }
 
-    void Update () {
-        float distance = Vector3.Distance(target.position, transform.position);
-        if(distance <= lookRadius)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
         {
-            agent.isStopped = false;
-            agent.SetDestination(target.position);
-            _animator.SetBool("isWalking", true);
+            followEnemy = true;
+            target = other.gameObject.transform;
+        }
+    }
 
-            if (distance <= agent.stoppingDistance)
+    void Update()
+    {
+        if (target != null)
+        {
+            if (followEnemy)
             {
-                _animator.SetBool("isWalking", false);
-                _animator.SetBool("isAttacking", true);
-                LookAtTarget();
+                agent.isStopped = false;
+                agent.SetDestination(target.position);
+                _animator.SetBool("isWalking", true);
+                float distance = Vector3.Distance(target.position, transform.position);
+                if (distance <= agent.stoppingDistance)
+                {
+                    _animator.SetBool("isWalking", false);
+                    _animator.SetBool("isAttacking", true);
+                    LookAtTarget();
+                }
+                else if (distance > lookRadius)
+                {
+                    _animator.SetBool("isAttacking", false);
+                    followEnemy = false;
+                }
             }
             else
             {
-                _animator.SetBool("isAttacking", false);
+                agent.isStopped = true;
+                _animator.SetBool("isWalking", false);
             }
         }
-        else {
-            agent.isStopped=true;
-            _animator.SetBool("isWalking", false);
+    }
+
+    public void StopAttacking()
+    {
+        followEnemy = false;
+        if (_animator.GetBool("isAttacking"))
+        {
+            _animator.SetBool("isAttacking", false);
         }
+    }
+
+    IEnumerator KILL()
+    {
+        gameObject.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 
     void LookAtTarget()

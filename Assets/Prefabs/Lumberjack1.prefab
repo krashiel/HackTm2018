@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 136664978190353188}
   - component: {fileID: 54183880313106664}
   - component: {fileID: 114486029327270456}
+  - component: {fileID: 114124012482023330}
   m_Layer: 0
   m_Name: Lumberjack1
   m_TagString: Player
@@ -1454,7 +1455,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475536901500522}
   m_LocalRotation: {x: -0, y: -0.9577629, z: -0, w: 0.28755933}
-  m_LocalPosition: {x: 5.1273575, y: -0.9578507, z: -9.144882}
+  m_LocalPosition: {x: 9.803097, y: 0.0430429, z: -1.8405783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4107689213508556}
@@ -2276,6 +2277,22 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114124012482023330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475536901500522}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5143e2ce9d61748b867db3dd9240c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  textMeshPro: {fileID: 0}
+  health: 50
+  damage: 2
+  attackCooldown: 1
 --- !u!114 &114486029327270456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2287,6 +2304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc22701508c63a43b65843b9585b251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 4
+  playerCombatStats: {fileID: 0}
+  currentGround: {fileID: 0}
+  controller: {fileID: 0}
   choppingSound: {fileID: 82048535975743230, guid: 91debbf6055769340bdeaa96471d3db2,
     type: 2}
   pickAxeSound: {fileID: 82859011674819716, guid: 47185eb1b2da5d34da0bbfa30e0602b0,

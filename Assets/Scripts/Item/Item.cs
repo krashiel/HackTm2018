@@ -3,7 +3,12 @@
 public class Item : MonoBehaviour
 {
     public BaseItem baseItem;
-    private int itemStackCount = 1;
+    public int itemStackCount = 1;
+
+    private void Awake()
+    {
+        itemStackCount = 1;
+    }
 
     public int ItemStackCount()
     {

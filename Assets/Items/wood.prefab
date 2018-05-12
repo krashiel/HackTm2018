@@ -52,3 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseItem: {fileID: 11400000, guid: fbf745c80679be342a9f03cd83dec735, type: 2}
+  itemStackCount: 1

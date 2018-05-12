@@ -6,8 +6,13 @@ using UnityEngine.EventSystems;
 using CnControls;
 
 [RequireComponent(typeof(Rigidbody))]
-public class character_movement : MonoBehaviour
+public class character_movement : IController
 {
+    private Transform enemy;
+    private bool enemyInRange;
+    public int attackRange;
+    public CombatStats playerCombatStats;
+
     private CameraController cameraShake;
     Vector3 targetPosition;
     Transform targetObject;
@@ -23,6 +28,8 @@ public class character_movement : MonoBehaviour
     public static bool activity = false;
     bool lumberingBool = false;
     bool shouldRotate;
+
+    public static int damagePower = 1;
 
     public NavMeshAgent controller;
     float verticalVelocity;
@@ -42,10 +49,9 @@ public class character_movement : MonoBehaviour
     public GameObject cameraPrefab;
     public GameObject PlayerManageraPrefab;
 
-
-
     void Start()
     {
+        playerCombatStats = GetComponent<CombatStats>();
         StayOnGround();
         Instantiate(cameraPrefab, cameraPrefab.transform.position, cameraPrefab.transform.rotation);
         Instantiate(PlayerManageraPrefab, PlayerManageraPrefab.transform.position, PlayerManageraPrefab.transform.rotation);
@@ -78,11 +84,57 @@ public class character_movement : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            enemyInRange = true;
+            enemy = other.gameObject.transform;
+        }
+    }
+
+    public void StopAttacking()
+    {
+        enemyInRange = false;
+        if (_animator.GetBool("lumbering"))
+        {
+            _animator.SetBool("lumbering", false);
+        }
+    }
+
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return; //ignore clicks on UI
+        }
+
+        if (enemyInRange)
+        {
+            float distance = Vector3.Distance(enemy.position, transform.position);
+            if (distance <= attackRange)
+            {
+                moving = false;
+                var newTargetPos = new Vector3(enemy.position.x, transform.position.y, enemy.position.z);
+                var mDistance = newTargetPos - transform.position;
+                Quaternion lookOnLook = Quaternion.LookRotation(mDistance);
+
+                if (!moving)
+                {
+                    _animator.SetBool("lumbering", true);
+                    _animator.SetBool("isWalking", false);
+                }
+                if (moving)
+                {
+                    _animator.SetBool("lumbering", false);
+                    _animator.SetBool("isWalking", true);
+                }
+            }
+            else
+            {
+                enemyInRange = false;
+            }
         }
 
 
@@ -225,7 +277,7 @@ public class character_movement : MonoBehaviour
         int treeHealth = tree.GetComponent<tree_script>().treeHealth;
         if (treeHealth > 0)
         {
-            tree.GetComponent<tree_script>().treeHealth--;
+            tree.GetComponent<tree_script>().treeHealth -= damagePower;
             choppingSound.Play();
             //_choppingParticles.Play();
             _animator.SetBool("lumbering", true);
@@ -249,7 +301,7 @@ public class character_movement : MonoBehaviour
         int rockHealth = tree.GetComponent<rock_script>().rockHealth;
         if (rockHealth > 0)
         {
-            tree.GetComponent<rock_script>().rockHealth--;
+            tree.GetComponent<rock_script>().rockHealth -= damagePower;
             pickAxeSound.Play();
             //_choppingParticles.Play();
             _animator.SetBool("lumbering", true);
@@ -272,7 +324,7 @@ public class character_movement : MonoBehaviour
         int cactusHealth = cactus.GetComponent<cactus_script>().cactusHealth;
         if (cactusHealth > 0)
         {
-            cactus.GetComponent<cactus_script>().cactusHealth--;
+            cactus.GetComponent<cactus_script>().cactusHealth -= damagePower;
             choppingSound.Play();
             //_choppingParticles.Play();
             _animator.SetBool("lumbering", true);

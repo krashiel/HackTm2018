@@ -24,8 +24,8 @@ public class UIManager : MonoBehaviour
 
         SetPlayerInventoryActive(false);
         //SetInventoryActive(false);
-        SetPlayerHealthBarActive(false);
-        SetEnemyHealthBarActive(false);
+        SetPlayerHealthBarActive(true);
+        SetEnemyHealthBarActive(true);
         SetCraftingMenuActive(false);
     }
 
