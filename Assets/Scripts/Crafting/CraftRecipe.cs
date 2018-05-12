@@ -12,17 +12,18 @@ public class CraftRecipe : MonoBehaviour
     public List<int> necessaryItemsNumber;
 
     private List<Item> inventoryItems;
+    private bool isEligible = false;
     // Use this for initialization
     void Start()
     {
         inventoryItems = Inventory.instance.items;
+        this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Craft " + itemName;
     }
 
     public void checkIfEligible()
     {
         inventoryItems = Inventory.instance.items;
 
-        var isEligible = false;
         for (var i = 0; i < necessaryItems.Count; i++)
         {
             var item = necessaryItems[i];
@@ -43,6 +44,11 @@ public class CraftRecipe : MonoBehaviour
 
     public void CraftItem()
     {
-        Debug.Log("Crafting item with id {itemId}");
+        checkIfEligible();
+        if (isEligible)
+        {
+            Debug.Log("Crafting item with id {itemId}");
+        }
+        Debug.Log("Not enough materials to craft this item");
     }
 }
