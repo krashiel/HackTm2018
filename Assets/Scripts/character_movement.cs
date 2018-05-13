@@ -12,6 +12,7 @@ public class character_movement : IController
     private bool enemyInRange;
     public int attackRange;
     public CombatStats playerCombatStats;
+    EnemyController enemyScript;
 
     private CameraController cameraShake;
     Vector3 targetPosition;
@@ -51,7 +52,7 @@ public class character_movement : IController
 
     void Start()
     {
-        playerCombatStats = GetComponent<CombatStats>();
+        //playerCombatStats = GetComponent<CombatStats>();
         StayOnGround();
         Instantiate(cameraPrefab, cameraPrefab.transform.position, cameraPrefab.transform.rotation);
         Instantiate(PlayerManageraPrefab, PlayerManageraPrefab.transform.position, PlayerManageraPrefab.transform.rotation);
@@ -85,23 +86,23 @@ public class character_movement : IController
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            enemyInRange = true;
-            enemy = other.gameObject.transform;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Enemy")
+    //    {
+    //        enemyInRange = true;
+    //        enemy = other.gameObject.transform;
+    //    }
+    //}
 
-    public void StopAttacking()
-    {
-        enemyInRange = false;
-        if (_animator.GetBool("lumbering"))
-        {
-            _animator.SetBool("lumbering", false);
-        }
-    }
+    //public void StopAttacking()
+    //{
+    //    enemyInRange = false;
+    //    if (_animator.GetBool("lumbering"))
+    //    {
+    //        _animator.SetBool("lumbering", false);
+    //    }
+    //}
 
     void Update()
     {
@@ -210,6 +211,15 @@ public class character_movement : IController
                         lookAtBool = true;
                         actionBool = false;
                         StartCoroutine(hitCactus(targetObject, 1.0f));
+                        activity = true;
+                        break;
+                    case "Enemy":
+                        Debug.Log("Enemy !!");
+                        lookAtBool = true;
+                        actionBool = false;
+                        StartCoroutine(hitEnemy(targetObject, 1.0f));
+                        enemyScript = targetObject.GetComponent<EnemyController>();
+                        enemyScript.target = transform;
                         activity = true;
                         break;
                 }
@@ -339,6 +349,30 @@ public class character_movement : IController
             fallingTree.Play();
             _animator.SetBool("lumbering", false);
             cactus.GetComponent<cactus_script>().isDead = true;
+            StopCoroutine("hitRock");
+            activity = false;
+        }
+    }
+
+    private IEnumerator hitEnemy(Transform enemy, float sec)
+    {
+        int enemyHealth = enemy.GetComponent<enemy_script>().enemyHealth;
+        if (enemyHealth > 0)
+        {
+            enemy.GetComponent<enemy_script>().enemyHealth -= damagePower;
+            choppingSound.Play();
+            //_choppingParticles.Play();
+            _animator.SetBool("lumbering", true);
+            Debug.Log(enemyHealth);
+            yield return new WaitForSeconds(sec);
+            StartCoroutine(hitEnemy(enemy, 1.0f));
+
+        }
+        else
+        {
+            fallingTree.Play();
+            _animator.SetBool("lumbering", false);
+            enemy.GetComponent<enemy_script>().isDead = true;
             StopCoroutine("hitRock");
             activity = false;
         }

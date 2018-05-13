@@ -7,7 +7,7 @@ public class EnemyController : IController
 {
     public float lookRadius = 5;
 
-    Transform target;
+    public Transform target;
     NavMeshAgent agent;
     Animator _animator;
 
@@ -17,15 +17,6 @@ public class EnemyController : IController
     {
         agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            followEnemy = true;
-            target = other.gameObject.transform;
-        }
     }
 
     void Update()

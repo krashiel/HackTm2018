@@ -28,33 +28,7 @@ public class CombatStats : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        bool isPlayer = other.tag == "Player";
-        bool isEnemy = other.tag == "Enemy";
-
-        if (isPlayer || isEnemy)
-        {
-            var distance = Vector3.Distance(other.transform.position, transform.position);
-            if (distance < 2f)
-            {
-                var targetDamage = other.GetComponent<CombatStats>().damage;
-                IController targetController;
-                if (isPlayer)
-                {
-                    targetController = other.GetComponent<character_movement>();
-                    StartCoroutine(GetDamage(targetDamage, targetController));
-                }
-                else if (isEnemy)
-                {
-                    targetController = other.GetComponent<EnemyController>();
-                    StartCoroutine(GetDamage(targetDamage, targetController));
-                }
-            }
-        }
-    }
-
-    public IEnumerator GetDamage(int dmg, IController controller)
+    public IEnumerator GetDamage(int dmg)
     {
         if (attackCooldown <= 0)
         {
