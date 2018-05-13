@@ -51,11 +51,19 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             SetPlayerInventoryActive(!playerInventoryObject.activeSelf);
+            if (craftingMenuObject.activeSelf)
+            {
+                SetCraftingMenuActive(false);
+            }
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             SetCraftingMenuActive(!craftingMenuObject.activeSelf);
             craftingMenuObject.GetComponent<CraftRecipes>().InitialiseCraftRecipesView();
+            if (playerInventoryObject.activeSelf)
+            {
+                SetPlayerInventoryActive(false);
+            }
         }
     }
 }

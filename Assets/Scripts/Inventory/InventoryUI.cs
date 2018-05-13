@@ -2,6 +2,7 @@
 
 public class InventoryUI : MonoBehaviour
 {
+    public static InventoryUI Instance;
     public Transform inventorySlots;
     Inventory inventory;
 
@@ -9,10 +10,23 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
+        if (Instance != null)
+        {
+            Debug.Log("Warning, inventory ui instance already existing");
+        }
+        Instance = this;
         inventory = Inventory.instance;
         inventory.onItemAddedCallback += UpdateUI;
 
         slots = inventorySlots.GetComponentsInChildren<InventorySlot>();
+    }
+
+    public void RefreshUI()
+    {
+        foreach (var slot in slots)
+        {
+            slot.UpdateStackText(slot.item);
+        }
     }
 
     public void UpdateUI()

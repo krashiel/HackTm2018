@@ -54,6 +54,9 @@ public class CraftRecipe : MonoBehaviour
         }
         checkIfEligible(true);
         character_movement.damagePower += 1;
+        InventoryUI.Instance.RefreshUI();
+        CraftRecipes.Instance.InitialiseCraftRecipesView();
         Debug.Log("Successfully upgraded weapon's power " + itemName);
+        isEligible = false;
     }
 }

@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
 
     public static Inventory instance;
 
-    void Awake()
+    void Start()
     {
         if (instance != null)
         {

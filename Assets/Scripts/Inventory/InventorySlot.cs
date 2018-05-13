@@ -36,6 +36,12 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
+    public void UpdateStackText(Item item)
+    {
+        stackCount.text = item.ItemStackCount().ToString();
+        stackObject.SetActive(true);
+    }
+
     // Clear the slot
     public void ClearSlot()
     {
