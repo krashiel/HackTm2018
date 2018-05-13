@@ -2,8 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using CnControls;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class character_movement : IController
@@ -50,12 +52,16 @@ public class character_movement : IController
     public GameObject cameraPrefab;
     public GameObject PlayerManageraPrefab;
 
+
+    Slider enemyHealthBar;
     void Start()
     {
         //playerCombatStats = GetComponent<CombatStats>();
         StayOnGround();
         Instantiate(cameraPrefab, cameraPrefab.transform.position, cameraPrefab.transform.rotation);
-        Instantiate(PlayerManageraPrefab, PlayerManageraPrefab.transform.position, PlayerManageraPrefab.transform.rotation);
+        GameObject pManager = Instantiate(PlayerManageraPrefab, PlayerManageraPrefab.transform.position, PlayerManageraPrefab.transform.rotation);
+        PlayerManager pMngScript = pManager.GetComponent<PlayerManager>();
+        pMngScript.player = transform.gameObject;
 
         controller = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
@@ -217,9 +223,9 @@ public class character_movement : IController
                         Debug.Log("Enemy !!");
                         lookAtBool = true;
                         actionBool = false;
+                        enemyHealthBar = GameObject.FindWithTag("EnemyHealthBar").GetComponent<Slider>();
+                        enemyHealthBar.maxValue = targetObject.GetComponent<enemy_script>().enemyHealth;
                         StartCoroutine(hitEnemy(targetObject, 1.0f));
-                        enemyScript = targetObject.GetComponent<EnemyController>();
-                        enemyScript.target = transform;
                         activity = true;
                         break;
                 }
@@ -354,12 +360,23 @@ public class character_movement : IController
         }
     }
 
+    private IEnumerator ReturnColor(Material mat, float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        mat.color = Color.white;
+
+    }
+
     private IEnumerator hitEnemy(Transform enemy, float sec)
     {
         int enemyHealth = enemy.GetComponent<enemy_script>().enemyHealth;
         if (enemyHealth > 0)
         {
             enemy.GetComponent<enemy_script>().enemyHealth -= damagePower;
+            Material mat = enemy.Find("Ttoll").GetComponent<Renderer>().material;
+            mat.color = Color.red;
+            StartCoroutine(ReturnColor(mat, 0.2f));
+            enemyHealthBar.value--;
             choppingSound.Play();
             //_choppingParticles.Play();
             _animator.SetBool("lumbering", true);

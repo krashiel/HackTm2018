@@ -14,9 +14,9 @@ public class CombatStats : MonoBehaviour
 
     public float attackCooldown = 1f;
 
-    private void Awake()
+    private void Start()
     {
-        healthSlider.maxValue = health;
+       // healthSlider.maxValue = health;
         UpdateHealthBar();
     }
 

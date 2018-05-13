@@ -8,9 +8,15 @@ public class enemy_script : MonoBehaviour
     public bool isDead = false;
     public Transform stump;
 
+    private void Start()
+    {
+
+    }
     private void Update()
     {
-        if (enemyHealth <= 0 && isDead)
+
+
+        if (enemyHealth < 1 && isDead)
         {
             rockExplosion();
             isDead = false;

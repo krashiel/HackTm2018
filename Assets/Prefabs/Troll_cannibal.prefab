@@ -475,7 +475,8 @@ GameObject:
   - component: {fileID: 136460812625631820}
   - component: {fileID: 195958365064347154}
   - component: {fileID: 114845240697762320}
-  - component: {fileID: 65700093688004544}
+  - component: {fileID: 114128024866303726}
+  - component: {fileID: 136213399879886526}
   m_Layer: 0
   m_Name: Troll_cannibal
   m_TagString: Enemy
@@ -1773,18 +1774,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &65700093688004544
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596672879822900}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 0.1, z: 10}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &95608477812735460
 Animator:
   serializedVersion: 3
@@ -1803,6 +1792,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114128024866303726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596672879822900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a289a8cf907da4c96474f9d1be0acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 10
+  isDead: 0
+  stump: {fileID: 4235529244318898, guid: 0a31c8fa335377648ab83288e67123d2, type: 2}
 --- !u!114 &114845240697762320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1815,6 +1818,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 4
+--- !u!136 &136213399879886526
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596672879822900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.83
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!136 &136460812625631820
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2007,7 +2023,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 0.5
+  m_Speed: 1.5
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
