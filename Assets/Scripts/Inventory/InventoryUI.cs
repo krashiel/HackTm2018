@@ -25,7 +25,10 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var slot in slots)
         {
-            slot.UpdateStackText(slot.item);
+            if (slot.item != null)
+            {
+                slot.UpdateStackText(slot.item);
+            }
         }
     }
 

@@ -34,12 +34,12 @@ public class CraftRecipe : MonoBehaviour
                 var invItem = inventoryItems.FirstOrDefault(it => it.baseItem.id == item.baseItem.id);
                 if (invItem.ItemStackCount() >= necessaryItemsNumber[i])
                 {
+                    isEligible = true;
                     gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.cyan;
                     if (shouldUpdateValues)
                     {
                         invItem.AddStackCount(-necessaryItemsNumber[i]);
                     }
-                    isEligible = true;
                 }
             }
         }
@@ -47,12 +47,12 @@ public class CraftRecipe : MonoBehaviour
 
     public void CraftItem()
     {
+        checkIfEligible(true);
         if (!isEligible)
         {
             Debug.Log("Not enough materials to craft this " + itemName);
             return;
         }
-        checkIfEligible(true);
         character_movement.damagePower += 1;
         InventoryUI.Instance.RefreshUI();
         CraftRecipes.Instance.InitialiseCraftRecipesView();
