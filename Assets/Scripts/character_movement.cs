@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using CnControls;
 
 [RequireComponent(typeof(Rigidbody))]
 public class character_movement : MonoBehaviour
@@ -93,27 +91,6 @@ public class character_movement : MonoBehaviour
             _animator.SetBool("isWalking", true);
         }
         ApplyInput(moveAxis, turnAxis);
-
-        /*if(CnInputManager.GetAxis("Vertical") > 0)
-         {
-             transform.position += transform.forward * CnInputManager.GetAxis("Vertical") * speed * Time.deltaTime;
-         }
-         else if(CnInputManager.GetAxis("Vertical") < 0)
-         {
-             transform.position -= -transform.forward * CnInputManager.GetAxis("Vertical") * speed * Time.deltaTime;
-         }
-
-
-         if (CnInputManager.GetAxis("Horizontal") > 0)
-         {
-             transform.position += transform.right * CnInputManager.GetAxis("Horizontal") * speed * Time.deltaTime;
-         }
-         else if (CnInputManager.GetAxis("Horizontal") < 0)
-         {
-             transform.position -= -transform.right * CnInputManager.GetAxis("Horizontal") * speed * Time.deltaTime;
-         }
-         */
-
 
         if (Input.GetMouseButtonDown(0))
         {
